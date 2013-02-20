@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+
+	<link rel="stylesheet"
+		href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+	<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+	<script src="./js/script.js"></script>
+
+	<h:outputStylesheet library="css" name="style.css"/>
+	<title>KimeGitsem Hizmet Veren Uygulaması</title>
+</h:head>
+<h:body>
+
+	<div id="topBar">
+		<a id="logo" href="/"></a>
+		<div class="topMenu">
+			<ul>
+				
+			</ul>
+		</div>
+		<div id="header_panel_logo"></div>
+	</div>
+	
+	<div id="header">
+		<div id="header_content">
+			<p style="margin-bottom: 20px;">Kulaktan kulaga iletisimi, sosyal
+				medyanın etkisiyle birlestirip arkadaslarınızın degerli
+				tavsiyelerini bir tık uzakliginda size sunan yeni bir mobil ve web
+				servisi uygulamasıdir.</p>
+				<form action="signin/facebook" method="post">
+		    		<button type="submit" id="header_fb_button" style="cursor:pointer;">Facebook ile bağlan</button>
+				</form>
+		</div>
+	</div>
+	
+	
+	<div id="footer">
+		<div class="footerMainMenu">
+			<ul>
+<!-- 				<li> -->
+<!-- 					<h3>Kategoriler</h3> -->
+<!-- 					<div class="subCategory"> -->
+<!-- 						<ul> -->
+<!-- 							<li><span><a href="/">Sağlık</a></span></li> -->
+<!-- 							<li><span><a href="/">Eğitim</a></span></li> -->
+<!-- 							<li><span><a href="/">Hukuk</a></span></li> -->
+<!-- 							<li><span><a href="/">Oto</a></span></li> -->
+<!-- 							<li><span><a href="/">Tamirat</a></span></li> -->
+<!-- 						</ul> -->
+<!-- 					</div> -->
+<!-- 				</li> -->
+				<li>
+					<h3>Hakkımızda</h3>
+					<div class="subCategory">
+						KimeGitsem.com işyerlerinizin en hızlı ve etkili bir şekilde duyulmasını sağlamaktadır
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="socialFooter">
+			<ul>
+				<li><a id="footer_facebook" href="/facebook" title="Facebook"></a></li>
+				<li><a id="footer_twitter" href="/twitter" title="Twitter"></a></li>
+				<li><a id="footer_linkedin" href="/linkedin" title="LinkedIn"></a></li>
+			</ul>
+		</div>
+	</div>
+</h:body>
+</html>

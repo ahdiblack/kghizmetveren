@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:fu="http://java.sun.com/jsf/fileUpload"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<link rel="stylesheet"
+		href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+	<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+	<script src="./js/script.js"></script>
+
+	<h:outputStylesheet library="css" name="style.css" />
+	<title>KimeGitsem Hizmet Veren Uygulaması</title>
+</h:head>
+<h:body>
+	
+	<div id="header_bottom" style="position: absolute; top: 0;">
+		<div id="logo_search"></div>
+		<div class="signoutPanel">
+			<h:graphicImage id="fbImg" value="#{sessionUtil.user.imageUrl}" />
+		</div>
+	</div>
+	<div id="middle_panel">
+
+		<div id="content_panel">
+			<div id="left_content">
+				<h:form prependId="false" method="post"
+					enctype="multipart/form-data" accept-charset="UTF-8">
+					<h:inputHidden value="#{homeBean.loggedIn}" />
+					<h:messages style="color:red;margin:8px;font-size:14px;"></h:messages>
+					<h:panelGrid columns="2" style="margin:0 0 20px 0;">
+						Hizmet veren adı
+						<h:inputText id="providerName"
+							value="#{homeBean.provider.poiName}"
+							styleClass="tavsiye_et_texts" />
+						Bilgi  
+						<h:inputText value="#{homeBean.provider.info}"
+							styleClass="tavsiye_et_texts" />
+						Kategori  
+						<h:selectOneMenu value="#{homeBean.categoryId}"
+							style="margin: 0 0 0 6px;">
+							<f:selectItem itemLabel="Lütfen seçin..." />
+							<f:selectItems value="#{homeBean.categories}" var="c"
+								itemValue="#{c.categoryId}" itemLabel="#{c.categoryName}" />
+						</h:selectOneMenu>
+						İl 
+						<h:selectOneMenu value="#{homeBean.selectedId}"
+							style="margin: 0 0 0 6px;">
+							<f:selectItem itemLabel="Lütfen seçin..." />
+							<f:selectItems value="#{homeBean.cities}" var="city"
+								itemValue="#{city.cityId}" itemLabel="#{city.cityName}" />
+							<f:ajax listener="#{homeBean.changeDistrict}"
+								render="districts subDistricts" />
+						</h:selectOneMenu>
+						İlçe 
+						<h:selectOneMenu value="#{homeBean.selectedId}" id="districts"
+							style="margin: 0 0 0 6px;">
+							<f:selectItem itemLabel="Lütfen seçin..." />
+							<f:selectItems value="#{homeBean.districts}" var="district"
+								itemValue="#{district.districtId}"
+								itemLabel="#{district.districtName}" />
+							<f:ajax listener="#{homeBean.changeSubDistrict}"
+								render="subDistricts" />
+						</h:selectOneMenu>
+						Mahalle
+						<h:selectOneMenu id="subDistricts"
+							value="#{homeBean.selectedSubDistrictId}"
+							style="margin: 0 0 0 6px;">
+							<f:selectItem itemLabel="Lütfen seçin..." />
+							<f:selectItems value="#{homeBean.subDistricts}" var="city"
+								itemValue="#{city.subdistrictId}"
+								itemLabel="#{city.subdistrictName}" />
+						</h:selectOneMenu>
+						Adres  
+						<h:inputTextarea cols="30" rows="10"
+							value="#{homeBean.provider.address}"
+							styleClass="tavsiye_et_aciklama" />
+						Telefon  
+						<h:inputText value="#{homeBean.provider.phone}"
+							styleClass="tavsiye_et_texts" />
+						Web Sitesi  
+						<h:inputText value="#{homeBean.provider.website}"
+							styleClass="tavsiye_et_texts" />
+						Anahtar Kelimeler  
+						<h:inputText value="#{homeBean.provider.keywords}"
+							styleClass="tavsiye_et_texts" />
+						Yetkilisi Misiniz? 
+						<!--EMail alanı ile ilgili -->
+						<h:selectOneRadio value="#{homeBean.isAuth}">
+							<f:selectItem itemValue="true" itemLabel="Evet" />
+							<f:selectItem itemValue="false" itemLabel="Hayır" />
+						</h:selectOneRadio>
+						Profil Resmi
+						<fu:fileUpload id="pic2" value="#{homeBean.profileImage}" />
+					</h:panelGrid>
+
+					<script type="text/javascript"
+						src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAtJCjwMMQJ0UKcv8AV71t8zwUJsxTTTy4&amp;sensor=true">
+						
+					</script>
+					<script type="text/javascript">
+						var oldMarker;
+						var geocoder = null;
+						function initialize() {
+							var address = "Istanbul";
+							geocoder = new google.maps.Geocoder();
+							geocoder
+									.geocode(
+											{
+												'address' : address
+											},
+											function(results, status) {
+												if (status == google.maps.GeocoderStatus.OK) {
+													var latitude = results[0].geometry.location
+															.lat();
+													var longitude = results[0].geometry.location
+															.lng();
+													var poiLatlng = new google.maps.LatLng(
+															latitude, longitude);
+													var mapOptions = {
+														center : poiLatlng,
+														zoom : 11,
+														mapTypeId : google.maps.MapTypeId.ROADMAP
+													};
+													var map = new google.maps.Map(
+															document
+																	.getElementById("map_canvas"),
+															mapOptions);
+
+													google.maps.event
+															.addListener(
+																	map,
+																	'click',
+																	function(
+																			event) {
+																		var lat = event.latLng
+																				.lat();
+																		var lng = event.latLng
+																				.lng();
+																		document
+																				.getElementById("lat").value = lat;
+																		document
+																				.getElementById("lng").value = lng;
+																		placeMarker(event.latLng);
+																	});
+
+													function placeMarker(
+															location) {
+														marker = new google.maps.Marker(
+																{
+																	position : location,
+																	map : map
+																});
+														if (oldMarker != undefined) {
+															oldMarker
+																	.setMap(null);
+														}
+														oldMarker = marker;
+													}
+												}
+											});
+						}
+					</script>
+					<div id="map_canvas" style="width: 500px; height: 400px">
+						<script type="text/javascript">
+							initialize();
+						</script>
+					</div>
+					<h:inputHidden name="poi.coordLat" value="#{homeBean.lat}" id="lat" />
+					<h:inputHidden name="poi.coordLong" value="#{homeBean.lang}" id="lng" />
+
+					<h:commandButton style="margin:20px 0 0 0;" id="header_fb_button"
+						value="Kaydet" action="#{homeBean.saveProvider}"></h:commandButton>
+				</h:form>
+
+			</div>
+			<div id="right_content">
+				<h:panelGrid columns="1" styleClass="leftMenu"
+					rendered="#{sessionUtil.user!=null}">
+					<h:panelGroup id="profil_links">
+						<div class="plain-button">
+							<h:link value="Hesabın" outcome="/index"></h:link>
+							<br />
+						</div>
+						<div class="button-navigate">
+							<h:link value="Hizmet Veren Ekle" outcome="/hizmet-veren-ekle"></h:link>
+						</div>
+						<div class="plain-button">
+							<form action="signout" method="post">
+								<button type="submit" class="logout_btn">Çıkış</button>
+							</form>
+						</div>
+					</h:panelGroup>
+				</h:panelGrid>
+
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		<div class="footerMainMenu">
+			<ul>
+				<li>
+					<h3>Kategoriler</h3>
+					<div class="subCategory">
+						<ul>
+							<li><span><a href="/">Sağlık</a></span></li>
+							<li><span><a href="/">Eğitim</a></span></li>
+							<li><span><a href="/">Hukuk</a></span></li>
+							<li><span><a href="/">Oto</a></span></li>
+							<li><span><a href="/">Tamirat</a></span></li>
+						</ul>
+					</div>
+				</li>
+				<li>
+					<h3>Reklam</h3>
+					<div class="subCategory">
+						<ul>
+							<li><span><a href="/">Sağlık</a></span></li>
+							<li><span><a href="/">Eğitim</a></span></li>
+							<li><span><a href="/">Hukuk</a></span></li>
+							<li><span><a href="/">Oto</a></span></li>
+							<li><span><a href="/">Tamirat</a></span></li>
+						</ul>
+					</div>
+				</li>
+				<li>
+					<h3>Hakkımızda</h3>
+					<div class="subCategory">
+						<ul>
+							<li><span><a href="/">Sağlık</a></span></li>
+							<li><span><a href="/">Eğitim</a></span></li>
+							<li><span><a href="/">Hukuk</a></span></li>
+							<li><span><a href="/">Oto</a></span></li>
+							<li><span><a href="/">Tamirat</a></span></li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="socialFooter">
+			<ul>
+				<li><a id="footer_facebook" href="/facebook" title="Facebook"></a></li>
+				<li><a id="footer_twitter" href="/twitter" title="Twitter"></a></li>
+				<li><a id="footer_linkedin" href="/linkedin" title="LinkedIn"></a></li>
+			</ul>
+		</div>
+	</div>
+
+</h:body>
+</html>
