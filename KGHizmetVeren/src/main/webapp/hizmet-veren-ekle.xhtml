@@ -30,8 +30,16 @@
 
 		<div id="content_panel">
 			<div id="left_content">
-				<h:form prependId="false" method="post"
+			
+				<h:form rendered="#{homeBean.findProvider()}">
+					<div style="color:red">
+						Zaten eklenmiş bir Hizmet Veren kaydınız var. <br /> <br />
+						Lütfen <h:link value="Davet/Paylaş" outcome="/index" /> linki ile işletmenizin duyurulmasına yardımcı olun.
+					</div>
+				</h:form>
+				<h:form prependId="false" method="post" rendered="#{!homeBean.findProvider()}"
 					enctype="multipart/form-data" accept-charset="UTF-8">
+					
 					<h:inputHidden value="#{homeBean.loggedIn}" />
 					<h:messages style="color:red;margin:8px;font-size:14px;"></h:messages>
 					<h:panelGrid columns="2" style="margin:0 0 20px 0;">
@@ -185,7 +193,7 @@
 					rendered="#{sessionUtil.user!=null}">
 					<h:panelGroup id="profil_links">
 						<div class="plain-button">
-							<h:link value="Hesabın" outcome="/index"></h:link>
+							<h:link value="Davet/Paylaş" outcome="/index"></h:link>
 							<br />
 						</div>
 						<div class="button-navigate">

@@ -51,16 +51,19 @@
 	    				onclick="sendRequestViaMultiFriendSelector(); return false;" 
 	    					value="Facebook Arkadaşlarını Davet Et"/>
 					</div>
-					<div class="mytextarea" style="padding:20px 20px 0 20px;">
+					<div class="mytextarea" style="padding:20px 20px 0 20px;height:350px;">
 						<p>
-							Arkadaşlarını KimeGitsem uygulamasını kullanmaları için e-posta yolu ile de davet edebilirsin. 
+							Arkadaşlarını KimeGitsem uygulamasını kullanmaları için e-posta yolu ile de davet edebilirsin.
+							<br/> 
+							Göndermek istediğin mail adreslerini <b><i>satır satır</i></b> aşağıdaki metin kutusuna girmelisin.
 						</p>
 	    				<h:form prependId="false">
-							<h:panelGrid columns="2" style="margin: 10px 0 0 30px;">
+	    					
+							<h:panelGrid columns="1" style="margin: 10px 0 0 30px;">
 								<label style="">E-Posta</label>
-								<h:inputText value="#{homeBean.share}" styleClass="tavsiye_et_texts"/>
+								<h:inputTextarea style="width:370px" value="#{mailBean.email}" styleClass="mytextarea"/>
 							</h:panelGrid>
-						<h:commandButton style="margin: 0 0 0 150px;" class="fb_btn" value="İstek Gönder" action="#{homeBean.shareFacebook}"></h:commandButton>
+						<h:commandButton style="margin: 0 0 0 150px;" class="fb_btn" value="İstek Gönder" action="#{mailBean.shareMailSuggestion}"></h:commandButton>
 					</h:form>
 					</div>
 				</div>
@@ -69,7 +72,7 @@
 				<h:panelGrid columns="1" styleClass="leftMenu" rendered="#{sessionUtil.user!=null}">
 					<h:panelGroup id="profil_links">
 						<div class="button-navigate">
-							<h:link value="Hesabın" outcome="/index"></h:link><br/>
+							<h:link value="Davet/Paylaş" outcome="/index"></h:link><br/>
 						</div>
 						<div class="plain-button">
 							<h:link value="Hizmet Veren Ekle" outcome="/hizmet-veren-ekle"></h:link>

@@ -23,7 +23,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.ClassPathResource;
@@ -40,6 +39,7 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 
 import com.yaser.app.SessionUtil;
 import com.yaser.data.dao.UserDAO;
@@ -92,6 +92,13 @@ public class MainConfig {
 		}
 	    
 		@Bean
+		public VelocityEngineFactoryBean velocityEngine() {
+			VelocityEngineFactoryBean b = new VelocityEngineFactoryBean();
+			b.setResourceLoaderPath("/WEB-INF/velocity");
+			return b;
+		}
+		
+		@Bean
 		public JavaMailSender javaMailSender() {
 			
 			JavaMailSenderImpl jm = new JavaMailSenderImpl();
@@ -104,6 +111,8 @@ public class MainConfig {
 			Properties p = new Properties();
 			p.setProperty("mail.smtp.auth", "true");
 			p.setProperty("mail.smtp.starttls.enable", "true");
+			p.setProperty("mail.smtp.socketFactory.port", "465");
+			p.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 			
 			jm.setJavaMailProperties(p);
 			

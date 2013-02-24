@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style type="text/css">
+.FF {
+	font-family: Arial, Helvetica, sans-serif;
+}
+.addPoi {	
+
+	padding:9px 10px;
+	border:1px solid #016799; -webkit-border-radius: 5px; -moz-border-radius: 3px;border-radius: 3px;font-family:arial, helvetica, sans-serif; text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; font-size:16px; text-align: center; text-decoration: none; color: #FFFFFF; background-color: #016799;
+ 	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #016799), color-stop(100%, #016799));
+ 	background-image: -webkit-linear-gradient(top, #016799, #016799);
+ 	background-image: -moz-linear-gradient(top, #016799, #016799);
+ 	background-image: -ms-linear-gradient(top, #016799, #016799);
+ 	background-image: -o-linear-gradient(top, #016799, #016799);
+ 	background-image: linear-gradient(top, #016799, #016799);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#016799, endColorstr=#016799);
+ 	vertical-align: middle;
+	position:relative;
+}
+</style>
+</head>
+
+<body>
+<p>&nbsp;</p>
+<table border="0" style="width:654px; font-family: Arial, Helvetica, sans-serif; font-size: 16px;">
+  <tr>
+    <td><img src="$logo" width="293" height="75" /></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0">
+      <tr>
+        <td valign="top"><img src="$profile"/></td>
+        <td><p><strong>$name $surname</strong>,  kimegitsem?com'da. Tavsiye etmek istiyorsan t&#305;kla</p>
+        
+          <p><a href="web1.kimegitsem.com" class="addPoi">Tavsiye Et</a></p>
+          <p>
+          kimegitsem?com'da tavsiye istemek ve tavsiye yazmak &#231;ok kolay! Siz de tamamen &#252;cretsiz kimegitsem?com'a &#252;ye olun, sosyal medyadaki arkada&#351; &#231;evrenizin g&#252;c&#252;n&#252; ke&#351;fedin.
+          </p>
+          </td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr><td>
+  	<table border="0" cellpadding="0" cellspacing="0" background="$footer" style="width:654px; height:75px; font-size: 11px; color: #FFF;"> 
+    <tr><td><p class="FF">kimegitsem?com, en g&#252;venilir referans kayna&#287;&#305; olan arkada&#351; tavsiyelerini 'sosyal'le&#351;tiren internet hizmetidir. Yeme i&#231;meden, ki&#351;isel bak&#305;ma, doktordan, eve dair her &#351;eye yerel &#231;evrenizde g&#252;venebilece&#287;iniz hizmet verenleri kimegitsem?com'da sosyal a&#287;lardan yararlanarak arkada&#351;lar&#305;n&#305;z&#305;n ge&#231;mi&#351; tavsiyelerinden yola &#231;&#305;karak bulun. Cevab&#305;n&#305; alamad&#305;&#287;&#305;n&#305;z sorular&#305; t&#252;m arkada&#351; &#231;evrenize an&#305;nda dan&#305;&#351;&#305;n, arkada&#351; tavsiyelerini hi&#231; olmad&#305;&#287;&#305; kadar h&#305;zl&#305; toplay&#305;n</p>
+</td><td style="width:100px">&nbsp;</td></tr></table>
+     </td></tr>
+</table>
+</body>
+</html>

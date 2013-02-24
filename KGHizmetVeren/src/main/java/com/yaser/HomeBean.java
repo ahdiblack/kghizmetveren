@@ -12,6 +12,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import org.springframework.core.env.Environment;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.FacebookLink;
 import org.springframework.social.facebook.api.Reference;
@@ -94,6 +95,9 @@ public class HomeBean {
 	private String share;
 
 	private String isAuth;
+	
+	@Inject
+	private Environment environment;
 
 	@Inject
 	public HomeBean(Facebook facebook) {
@@ -196,24 +200,35 @@ public class HomeBean {
 		TblPoi p = tblPoiDAO.findByAdminId(subscriberId);
 		if (p == null) {
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage("Size ait bir Hizmet Veren kaydý bulunamadý."));
+					new FacesMessage("Size ait bir Hizmet Veren kaydý bulunamadý. Lütfen öncelikle Hizmet Veren kaydý girin."));
 			return;
 		}
 		Reference location = facebook.userOperations().getUserProfile()
 				.getLocation();
-		FacebookLink fl = new FacebookLink("web1.kimegitsem.com/"
+		FacebookLink fl = new FacebookLink(environment.getProperty("appUrl")
 				+ p.getUniqueIdentifier(), p.getPoiName(), location.getName(),
 				"kimegitsem?com'da tavsiye etmek ister misiniz?");
 		facebook.feedOperations().postLink(share, fl);
 		share = "";
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage("Paylaþýmýnýz Facebook duvarýnýza gönderilmiþtir."));
-		// sendAppRequest();
-		// String post =
-		// facebook.feedOperations().post(sessionUtil.getUser().getFbId(),
-		// share);
 	}
 
+	public boolean findProvider() {
+		if (provider == null) {
+			Integer subscriberId = sessionUtil.getUser().getSubscriberId();
+			provider = tblPoiDAO.findByAdminId(subscriberId);
+			
+			if (provider == null)
+				return false;
+			else {
+				return true;
+			}
+		} else {
+			return true;
+		}
+	}
+	
 	public String changeTurtoEng(String data) {
 
 		char[] arr = data.toCharArray();
